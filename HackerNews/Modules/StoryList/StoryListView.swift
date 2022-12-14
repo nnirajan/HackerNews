@@ -19,7 +19,7 @@ struct StoryListView: View {
                         let viewModel = StoryDetailViewModel(id: story.id)
                         StoryDetailView(viewModel: viewModel)
                     } label: {
-                        Text("\(story.id)")
+                        Text("\(story.title)")
                     }
                 }
             }
