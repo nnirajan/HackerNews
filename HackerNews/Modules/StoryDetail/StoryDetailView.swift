@@ -14,6 +14,7 @@ struct StoryDetailView: View {
     var body: some View {
         VStack {
             Text(viewModel.storyDetail?.title ?? "")
+            WebView(urlString: viewModel.storyDetail?.url ?? "")
         }
     }
 }
