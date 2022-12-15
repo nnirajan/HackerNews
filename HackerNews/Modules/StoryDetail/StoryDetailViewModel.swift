@@ -18,10 +18,10 @@ class StoryDetailViewModel: BaseViewModel {
     init(id: Int) {
         self.id = id
         super.init()
-        getStoryById(id: self.id)
     }
     
-    func getStoryById(id: Int) {
+    // MARK: getStoryDetail
+    func getStoryDetail() {
         let router = StoryRouter.story(id)
         
         networking.makeRequest(router: router).decode(to: StoryDetailResponse.self).sink { [weak self] completion in

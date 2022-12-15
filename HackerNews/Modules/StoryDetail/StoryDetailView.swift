@@ -15,6 +15,8 @@ struct StoryDetailView: View {
         VStack {
             Text(viewModel.storyDetail?.title ?? "")
             WebView(urlString: viewModel.storyDetail?.url ?? "")
+        }.onAppear {
+            viewModel.getStoryDetail()
         }
     }
 }
