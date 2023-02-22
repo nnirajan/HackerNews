@@ -94,39 +94,43 @@ struct TestingView: View {
             
             /// array logic
             ForEach(Array(viewModel.animal.customFields.enumerated()), id: \.offset) { index, customField in
-                TextField("Title", text: $viewModel.animal.customFields[index].title)
-                
-                TextField("Detail", text: $viewModel.animal.customFields[index].detail)
-                
-                if customField.files.isEmpty == false {
-                    ForEach(Array(customField.files.enumerated()), id: \.offset) { fileIndex, file in
-                        HStack {
-                            Text(file)
-                            Spacer()
-                            Button {
-                                viewModel.animal.customFields[index].files.remove(at: fileIndex)
-                            }  label: {
-                                Image(systemName: "trash")
+                Section {
+                    TextField("Title", text: $viewModel.animal.customFields[index].title)
+                    
+                    TextField("Detail", text: $viewModel.animal.customFields[index].detail)
+                    
+                    if customField.files.isEmpty == false {
+                        ForEach(Array(customField.files.enumerated()), id: \.offset) { fileIndex, file in
+                            HStack {
+                                Text(file)
+                                Spacer()
+                                Button {
+                                    viewModel.animal.customFields[index].files.remove(at: fileIndex)
+                                }  label: {
+                                    Image(systemName: "trash")
+                                }
                             }
+                            .foregroundColor(.orange)
                         }
-                        .foregroundColor(.orange)
                     }
-                }
-                
-                Button(action: {
-                    viewModel.selectedFileType = .addSupportingFile(index)
-                    viewModel.showFileManager.toggle()
-                }) {
-                    HStack {
-                        Image(systemName: "plus.circle")
-                        Text("Add supporting  files")
+                    
+                    Button(action: {
+                        viewModel.selectedFileType = .addSupportingFile(index)
+                        viewModel.showFileManager.toggle()
+                    }) {
+                        HStack {
+                            Image(systemName: "plus.circle")
+                            Text("Add supporting  files")
+                        }
                     }
                 }
             }
             
-            Button("Add field") {
-                viewModel.index += 1
-                viewModel.animal.customFields.append(CustomFields())
+            Section {
+                Button("Add field") {
+                    viewModel.index += 1
+                    viewModel.animal.customFields.append(CustomFields())
+                }
             }
             
             Section {
