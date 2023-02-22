@@ -44,29 +44,67 @@ struct TestingView: View {
     
     var body: some View {
         List {
-            ForEach(viewModel.animal.customFields.keys.sorted(), id: \.self) { key in
-                VStack(alignment: .leading, spacing: 10) {
-                    let binding: Binding<String> = Binding {
-                        return $viewModel.animal.customFields.title
-                    } set: {
-                        viewModel.animal.customFields.title = $0
-                    }
-//                    TextField("hello", text: $viewModel.animal.customFields[key]?.heading)
-                    
-                    Text(viewModel.animal.customFields[key]?.title ?? "N/A")
-                    Text(viewModel.animal.customFields[key]?.detail ?? "N/A")
-                }
+            /// dictionary logic
+//            ForEach(viewModel.animal.customFields.keys.sorted(), id: \.self) { key in
+//                VStack(alignment: .leading, spacing: 10) {
+////                    let binding: Binding<String> = Binding {
+////                        return $viewModel.animal.customFields[key].title
+////                    } set: {
+////                        viewModel.animal.customFields[key].title = $0
+////                    }
+////                    TextField("hello", text: $viewModel.animal.customFields[key]?.title)
+//
+//                    Text(viewModel.animal.customFields[key]?.title ?? "N/A")
+//                    Text(viewModel.animal.customFields[key]?.detail ?? "N/A")
+//                }
+//
+//                let files = viewModel.animal.customFields[key]?.files ?? []
+//                if files.isEmpty == false {
+//                    ForEach(files, id: \.self) { value in
+//                        HStack {
+//                            Text(value)
+//                            Spacer()
+//                            Button {
+//                                if let selectedIndex = files.firstIndex(where: { $0 == value }) {
+//                                    viewModel.animal.customFields[key]?.files.remove(at: selectedIndex)
+//                                }
+//                            }  label: {
+//                                Image(systemName: "trash")
+//                            }
+//                        }
+//                        .foregroundColor(.orange)
+//                    }
+//                }
+//
+//                Button(action: {
+//                    viewModel.selectedFileType = .addSupportingFile(key)
+//                    viewModel.showFileManager.toggle()
+//                }) {
+//                    HStack {
+//                        Image(systemName: "plus.circle")
+//                        Text("Add supporting  files")
+//                    }
+//                }
+//            }
+//
+//            Button("Add field") {
+//                viewModel.index += 1
+//                viewModel.animal.customFields[viewModel.index] = CustomFields(title: String.random(), detail: String.random(), files: [])
+//            }
+            
+            /// array logic
+            ForEach(Array(viewModel.animal.customFields.enumerated()), id: \.offset) { index, customField in
+                TextField("Title", text: $viewModel.animal.customFields[index].title)
                 
-                let files = viewModel.animal.customFields[key]?.files ?? []
-                if files.isEmpty == false {
-                    ForEach(files, id: \.self) { value in
+                TextField("Detail", text: $viewModel.animal.customFields[index].detail)
+                
+                if customField.files.isEmpty == false {
+                    ForEach(Array(customField.files.enumerated()), id: \.offset) { fileIndex, file in
                         HStack {
-                            Text(value)
+                            Text(file)
                             Spacer()
                             Button {
-                                if let selectedIndex = files.firstIndex(where: { $0 == value }) {
-                                    viewModel.animal.customFields[key]?.files.remove(at: selectedIndex)
-                                }
+                                viewModel.animal.customFields[index].files.remove(at: fileIndex)
                             }  label: {
                                 Image(systemName: "trash")
                             }
@@ -76,7 +114,7 @@ struct TestingView: View {
                 }
                 
                 Button(action: {
-                    viewModel.selectedFileType = .addSupportingFile(key)
+                    viewModel.selectedFileType = .addSupportingFile(index)
                     viewModel.showFileManager.toggle()
                 }) {
                     HStack {
@@ -88,7 +126,13 @@ struct TestingView: View {
             
             Button("Add field") {
                 viewModel.index += 1
-                viewModel.animal.customFields[viewModel.index] = CustomFields(title: String.random(), detail: String.random(), files: [])
+                viewModel.animal.customFields.append(CustomFields())
+            }
+            
+            Section {
+                Button("Send") {
+                    debugPrint(viewModel.animal)
+                }
             }
         }
         .sheet(isPresented: $viewModel.showFileManager) {
