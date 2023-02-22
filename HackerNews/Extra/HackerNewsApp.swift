@@ -11,8 +11,11 @@ import SwiftUI
 struct HackerNewsApp: App {
     var body: some Scene {
         WindowGroup {
-            let storyViewModel = StoryListViewModel()
-            StoryListView(viewModel: storyViewModel)
+//            let storyViewModel = StoryListViewModel()
+//            StoryListView(viewModel: storyViewModel)
+            
+            let vm = TestingViewModel()
+            TestingView(viewModel: vm)
         }
     }
 }
