@@ -47,12 +47,14 @@ struct DocumentPicker: UIViewControllerRepresentable {
             print(filePath)
             switch parent.selectedFile {
             case .addSupportingFile(let index):
-//                if parent.animal.customFields[index]?.files.isEmpty == true {
-//                    parent.animal.customFields[index]?.files = [filePath]
+                /// dict logic
+//                if parent.animal.customFieldsDict[index]?.files.isEmpty == true {
+//                    parent.animal.customFieldsDict[index]?.files = [filePath]
 //                } else {
-//                    parent.animal.customFields[index]?.files.append(filePath)
+//                    parent.animal.customFieldsDict[index]?.files.append(filePath)
 //                }
                 
+                /// array logic
                 if parent.animal.customFields.indices.contains(index) {
                     parent.animal.customFields[index].files.append(filePath)
                 } else {
