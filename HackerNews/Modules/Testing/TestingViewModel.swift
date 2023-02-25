@@ -9,13 +9,15 @@ import Foundation
 import Combine
 
 struct AnimalModel {
-//    var customFieldsDict: [Int: CustomFields] = [0: CustomFields()] /// dict
-    var customFields: [CustomFields] = [CustomFields()] /// array
+    var customFieldsDict: [Int: CustomFields] = [0: CustomFields()] /// dict
+//    var customFields: [CustomFields] = [CustomFields()] /// array
 }
 
 struct CustomFields {
-    var title: String = UUID().uuidString
-    var detail: String = UUID().uuidString
+//    var title: String = UUID().uuidString
+//    var detail: String = UUID().uuidString
+    var title: String = ""
+    var detail: String = ""
     var files: [String] = []
 }
 
