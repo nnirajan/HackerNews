@@ -14,8 +14,8 @@ struct HackerNewsApp: App {
 //            let storyViewModel = StoryListViewModel()
 //            StoryListView(viewModel: storyViewModel)
             
-            let vm = TestingViewModel()
-            TestingView(viewModel: vm)
+            let vm = DocumentPickerViewModel()
+            DoucumentPickerView(viewModel: vm)
         }
     }
 }

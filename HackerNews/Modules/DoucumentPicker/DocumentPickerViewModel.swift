@@ -21,7 +21,7 @@ struct CustomFields {
     var files: [String] = []
 }
 
-class TestingViewModel: BaseViewModel {
+class DocumentPickerViewModel: BaseViewModel {
     // MARK: properties
     @Published var animal: AnimalModel = AnimalModel()
     @Published var selectedFileType: SelectedFileType = .geneticReport

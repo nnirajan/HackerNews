@@ -1,5 +1,5 @@
 //
-//  TestingView.swift
+//  DoucumentPickerView.swift
 //  HackerNews
 //
 //  Created by ebpearls on 22/2/2023.
@@ -26,8 +26,8 @@ extension Optional where Wrapped == String {
     }
 }
 
-struct TestingView: View {
-    @ObservedObject var viewModel: TestingViewModel
+struct DoucumentPickerView: View {
+    @ObservedObject var viewModel: DocumentPickerViewModel
     
     private func titleBinding(for key: Int) -> Binding<String> {
         return .init(
@@ -151,6 +151,6 @@ struct TestingView: View {
 
 struct TestingView_Previews: PreviewProvider {
     static var previews: some View {
-        TestingView(viewModel: TestingViewModel())
+        DoucumentPickerView(viewModel: DocumentPickerViewModel())
     }
 }
